@@ -23,3 +23,15 @@ check_type.set(True)
 #######################建立標籤########################
 check_label = Label(window, text="True")
 check_label.grid(row=1, column=2, padx=10, pady=10)
+#######################建立Checkbutton########################
+check = Checkbutton(
+    window,
+    variable=check_type,
+    onvalue=True,
+    offvalue=False,
+    command=on_switch_change,
+    style="my.TCheckbutton",
+)
+check.grid(row=1, column=1, padx=10, pady=10)
+#######################運行主要程式########################
+window.mainloop()
