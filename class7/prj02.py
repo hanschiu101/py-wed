@@ -5,7 +5,13 @@ import os
 
 #######################設定工作目錄########################
 os.chdir(sys.path[0])
+
+
 #######################定義函數########################
+def on_switch_change():
+    check_label.config(text=str(check_type.get()))
+
+
 #######################建立視窗########################
 window = Tk()
 window.title("Checkbutton")
