@@ -2,6 +2,7 @@
 from ttkbootstrap import *
 import sys
 import os
+from PIL import Image, ImageTk
 
 #######################設定工作目錄########################
 os.chdir(sys.path[0])
@@ -29,6 +30,11 @@ check_type.set(True)
 #######################建立標籤########################
 check_label = Label(window, text="True")
 check_label.grid(row=1, column=2, padx=10, pady=10)
+image = Image.open("weather.png")
+img = ImageTK.PhotoImage(image)
+img_label = Label(window, image=img)
+img_label.grid(row=2, column=1, columnspan=2, padx=10, pady=10)
+img_label.image = img
 #######################建立Checkbutton########################
 check = Checkbutton(
     window,
