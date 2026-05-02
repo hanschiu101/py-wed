@@ -17,3 +17,9 @@ style = Style(theme="minty")
 
 style.configure("my.TCheckbutton", font=("Helvetica", font_size))
 style.configure("my.TCHeckbutton", font=("Helvetica", font_size))
+#######################建立變數########################
+check_type = BooleanVar()
+check_type.set(True)
+#######################建立標籤########################
+check_label = Label(window, text="True")
+check_label.grid(row=1, column=2, padx=10, pady=10)
