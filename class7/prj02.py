@@ -31,7 +31,7 @@ check_type.set(True)
 check_label = Label(window, text="True")
 check_label.grid(row=1, column=2, padx=10, pady=10)
 image = Image.open("weather.png")
-img = ImageTK.PhotoImage(image)
+img = ImageTk.PhotoImage(image)
 img_label = Label(window, image=img)
 img_label.grid(row=2, column=1, columnspan=2, padx=10, pady=10)
 img_label.image = img
