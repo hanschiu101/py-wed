@@ -9,7 +9,6 @@ LANG = "zh_tw"
 #######################主要程式########################
 city_name = input("請輸入城市名稱:")
 
-
 send_url = f"{BASE_URL}appid={API_KEY}&q={city_name}&units={UNITS}&lang={LANG}"
 
 print(f"發送的 URL:{send_url}")
