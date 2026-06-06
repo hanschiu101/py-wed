@@ -31,11 +31,11 @@ weather_api = weatherAPI(os.getenv("WEATHER_API_KEY"))
 def build_embed(weather_summary):
     embed = discord.Embed(
         # Embed 標題顯示城市名稱
-        title=f"{weather_summary['city_name']}",
+        title=f"{weather_summary['city_name']}的天氣",
         # Embed 描述顯示天氣描述
         description=f"{weather_summary['description']}",
         # 設定 Embed 顏色
-        color=discord.Color.from_str("#0E90FF"),
+        color=discord.Colour.from_str("#0E90FF"),
     )
 
     # 取得天氣圖示網址
@@ -99,9 +99,15 @@ async def weather(interaction: discord.Interaction, city_str: str):
         await interaction.followup.send("請先設定 OpenWeatherMap API 金鑰！")
         return
 
-    # 呼叫天氣 API，取得指定城市的天氣資料
-    weather_summary = weather_api.get_weather(city)
 
+    try:
+        weather_summary = weather_api.get_weather_summary(city)
+    except (requests.RequestException, ValueError) :
+        await interaction.followup.send("查詢天氣資訊失敗！")
+        return
+    if weather_summary is None:
+        await interaction.followup.send("找不到該城市的天氣資訊！")
+        return
     # 將天氣資料轉成 Discord Embed
     embed = build_embed(weather_summary)
 

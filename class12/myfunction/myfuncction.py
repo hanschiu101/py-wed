@@ -22,6 +22,7 @@ class weatherAPI:
         # 儲存語言設定
 
         self.base_url = "https://api.openweathermap.org/data/2.5/weather?"
+        self.forecast_url = "https://api.openweathermap.org/data/2.5/forecast?"
         # OpenWeatherMap 目前天氣 API 的基本網址
 
         self.icon_base = "https://openweathermap.org/img/wn/"
@@ -58,7 +59,7 @@ class weatherAPI:
             # 避免城市名稱錯誤或 API 回傳錯誤時發生程式錯誤
 
             return {
-                "city": city_name,
+                "city_name": city_name,
                 # 城市名稱
                 "weather": info["weather"][0]["main"],
                 # 天氣主要狀態，例如 Clear、Clouds、Rain
@@ -97,3 +98,21 @@ class weatherAPI:
 
         return None
         # 如果下載失敗，回傳 None
+    def get_forecast(self, city_name):
+        send_url = (
+            f"{self.forecast_url}q={city_name}&appid={self.api_key}"
+            f"&units={self.unit}&lang={self.lang}")
+        response = requests.get(send_url)
+        response.raise_for_status()
+        return response.json()
+        def get_forecast_summary(self, city_name,count=10):
+            forecast_count=max(0,count)
+            try:
+                info =self.get_forecast(city_name)
+            except requests.HTTPError as error:
+                response=error.response
+                if response is not None and response.status-code==404:
+                    return None
+                raise
+            if "city" in info and "list" in info:
+                return None
